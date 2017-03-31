@@ -19,3 +19,12 @@
   display:block;
   margin: auto;
 }
+#username{
+  font-size: 8pt;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.content{
+  margin-top: -2em;
+}
