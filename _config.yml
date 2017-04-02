@@ -16,7 +16,9 @@
 # Site settings
 title: Scott Lavigne
 email: scottlavigne28@gmail.com
-description: Renge is a Jekyll theme that is designed by Junchao (www.junchaowang.com) and inspired by amination “のんのんびより” and named by one of the Characters "Renge Miyauchi (宮内 れんげ Miyauchi Renge)".
+description: >
+  Scott Lavigne's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occassional 
+  cooking article. 
 baseurl: "http://local.scottlavigne.com/" # the subpath of your site, e.g. /blog
 url: "http://local.scottlavigne.com" # the base hostname & protocol for your
 github_username:  samuraiseoul
@@ -26,3 +28,4 @@ markdown: kramdown
 paginate: 3
 gems: [jekyll-paginate]
 paginate_path: "/page/:num"
+include: [ '_assets']
