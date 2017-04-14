@@ -28,4 +28,4 @@ markdown: kramdown
 paginate: 3
 gems: [jekyll-paginate]
 paginate_path: "/page/:num"
-include: [ '_assets']
+include: [ '_assets', '.nojekyll']
