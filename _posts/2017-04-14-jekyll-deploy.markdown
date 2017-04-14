@@ -25,13 +25,6 @@ git history wise. I've found a better way.
 
 ## git subtree
 
-Keeping a folder that contains your compiled site and checking it litters your
-commit history with commits that are just there to publish changes to your site,
-and checks in things that should not be in your site. So a docs folder is no good,
-and using gh-pages requires you to build in a new branch, delete everything that
-isn't your generated site and push it up, then force pull next time you want to
-publish as well as keep track of configs. Another way with an ugly history.
-
 ```
 git push origin :gh-pages
 git subtree push --prefix _site/ origin gh-pages
@@ -71,7 +64,7 @@ git stash
 ```
 
 Since I use this script in two places and didn't want to copy it include any changes
-I made a repo for the script alone. Then I add it to jekyll projects that deploy
+I made a [repo](https://github.com/samuraiseoul/JekyllDeploy) for the script alone. Then I add it to jekyll projects that deploy
 to github pages using
 
 ```
@@ -82,4 +75,4 @@ This prevents code reuse and allows easy updating in the future. Once you have t
 module pulled in, just run ```sh JekyllDeploy/publish.sh``` and your site should
 build and be deployed!
 
-Happy devving!
+Happy deving!
