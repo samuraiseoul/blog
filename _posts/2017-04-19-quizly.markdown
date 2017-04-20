@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "Quizly - A javascript quiz library made with typescript"
+date:   2017-04-19
+categories: typescript javascript library
+tags: typescript javascript
+---
+
+As I was building [kimchichingu.com](http://www.kimchichingu.com) I decided that
+at the end of each section, a simple interactive quiz would help people see
+if they understood the lesson. Naturally, I set out to find a library for it because
+why would I make my own? After some googling I couldn't find one that did what
+I wanted, most seemed to be more for polling or collecting info than a question
+answer style academic quiz, so I did what any good programmer would do and made
+my own!
+
+As I set off to create the library I had to decide on a few things:
+
+ * "Do I use jQuery? If so which version do I want to use as a dependency?"
+ * "How do I want to create the quizes? Json based? Attribute based?"
+ * "How do I want to distribute it? Git? Npm? Something else?"
+
+All of these were important questions, and I decided to not use jQuery as no one
+likes libraries that require libraries as a dependency, even though I am using it
+on Kimchi Chingu. I decided to allow the quizes to be made using json or attributes,
+and to allow for easy distribution through git and npm. Of course this led to more
+questions, such as how am I going to build this without worrying if the code works
+as intended if I want to expand it later or someone wants to open a pull request?
+I decided that in addition to tests, I was going to use something new and fancy
+and modern, something that compiles to vanilla javascript, and so I decided on
+Typescript. I get all the benefits of type checking as well as all the benefits
+of OOP, including being sure that privates are private, without the hassle of
+wondering if it is all working correctly.
+
+So to reiterate, a vanilla javascript quiz library, with no dependencies, written
+in typescript, that can be used via json or annotations. I'm not going to before
+anyone with the gritty details in code as that can be seen in the repository
+[here](https://github.com/samuraiseoul/quizly). Instead I'll talk a bit about my
+experience building this in Typescript. I would say that the two hardest parts
+of writing this in typescript were that javascript doesn't have true OOP,
+such as real ```private``` and ```protected``` access, as well as that when typescript checks
+for type mismatches, it also checks the ```HTMLElement``` types by default, whether
+you want it to or not.
+
+Javascript prototypical objects and inheritance don't play well together when
+you add ```protected``` and ```private``` into the mix, and also is just kind of clunky and more
+of a hacky solution than real classes like in a more OOP language such as Java.
+As a result, Typescript classes only check and enforce ```protected``` and ```private``` functions
+and fields at compile time, and then all things are actually ```public``` in the
+compiled javascript. This caused me hours of pain not knowing this as I was
+searching for a reason that my ```private``` fields were ```public``` once compiled.
+
+The second issue, the enforcing of ```HTMLElement``` types by default, was a huge hassle
+at the beginning when compiling things as ```document.querySelect()``` returns
+a generic ```HTMLElement``` which is expected, and so you have to cast everything. I
+would imagine that in a different javascript library that wasn't so element heavy,
+this would not be as much of a hassle, but it definitely was for quizly. I could
+have cast all of the ```HTMLElement``` returns to any to avoid having to figure ```HTMLElement```
+and it's family out, but as I would still have to cast just as many elements,
+and I would lose all the benefits of type checking that Typescript gives.
+I decided that learning which elements extend off of what would be useful as
+a web developer in future and also to make a more robust project now.
+
+That's the simplified story of quizly and how it was built. Would I use typescript
+again though? I definitely would. The type checking, is invaluable, and the
+familiarity with a OOP type syntax made coding something of this nature much
+less painful. So, if you're looking for a quiz library to use on your site that is light weight,
+or a not too hard to understand example of typescript, please consider using quizly!

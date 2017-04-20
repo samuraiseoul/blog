@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Deploying jekyll with custom plugins to github pages"
-date:   2016-04-14
+date:   2017-04-14
 categories: jekyll update github deploy
 tags: jekyll github deploy
 ---
