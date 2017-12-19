@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scott Lavigne</title>
+    <description>Scott Lavigne's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occassional cooking article.
+</description>
+    <link>http://www.scottlavigne.comhttp://www.scottlavigne.com/</link>
+    <atom:link href="http://www.scottlavigne.comhttp://www.scottlavigne.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 18 Dec 2017 18:55:32 -0600</pubDate>
+    <lastBuildDate>Mon, 18 Dec 2017 18:55:32 -0600</lastBuildDate>
+    <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Assigning the best possible name</title>
+        <description>&lt;p&gt;Everyone has heard the old joke that there are two hard things in programming.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cache Invalidation&lt;/li&gt;
+  &lt;li&gt;Naming things&lt;/li&gt;
+  &lt;li&gt;Off by one errors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This doesn’t have to be the case though. I currently am employed at a magazine
+company and was tasked with re-doing how we create magazines from the ground up.
+Each month our magazines have an issue go out, and an issue of course has many
+articles. Additionally, every issue has a few things that are in all issues,
+things like the cover, the table of contents, and a list of contributors. How we
+represent these in our data model is as a json object for each of them, so they
+all live together in one table. The hard part though was what to call them.&lt;/p&gt;
+
+&lt;p&gt;I put a lot of thought into it, trying to figure out the best word for their
+ name. I thought of words like basic, every, always, and foundation. I knew the
+ word I was looking for was something along these lines, but none of those words
+ were a perfect fit for what I needed. Basic was close but not elegant sounding
+ enough. Always and every were in the right category of words, but aren’t nouns.
+ Foundation is alright but as we use foundation for styling, we didn’t want to
+ run into problems when talking about things. I was about to give up and just
+ call these things basics when I had an idea, use a thesaurus.&lt;/p&gt;
+
+&lt;p&gt;A thesaurus is generally thought of as a writer’s tool, not a programmer’s, but
+ there’s nothing that says we can’t use it too. After a couple minutes of searching
+ thesaurus.com, clicking on all the words that sounded close to what I want, as
+ well as looking at antonyms for things that might help summon the word to my tongue
+ I found the word I wanted, “Essential”. Covers, and table of contents are essential
+ parts of a magazine, the word sounds fancier and more sophisticated than “Basic”,
+ a perfect fit for the task at hand. I may have found the word on my own after
+ spending a lot more time thinking, or perhaps I would have given up and kept a word
+ that conveyed what I needed, but wasn’t a perfect fit. In the end, we made the table,
+ and had a wonderful name for our things that were hard to talk about before. So
+ next time you find naming things to be hard, try opening a thesaurus!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 Dec 2017 00:00:00 -0600</pubDate>
+        <link>http://www.scottlavigne.comhttp://www.scottlavigne.com/programming/general/naming/2017/12/18/thesaurus-naming.html</link>
+        <guid isPermaLink="true">http://www.scottlavigne.comhttp://www.scottlavigne.com/programming/general/naming/2017/12/18/thesaurus-naming.html</guid>
+        
+        <category>general</category>
+        
+        <category>programming</category>
+        
+        <category>naming</category>
+        
+        <category>variables</category>
+        
+        
+        <category>programming</category>
+        
+        <category>general</category>
+        
+        <category>naming</category>
+        
+      </item>
+    
+      <item>
+        <title>Autodeploying a git repo with cron monitoring</title>
+        <description>&lt;p&gt;As I was building my &lt;a href=&quot;https://github.com/samuraiseoul/starbot&quot;&gt;slackbot&lt;/a&gt;, I was
+always running it locally. The problem was that I had two computers where I could
+be deving on it, and occasionally I would have two instances running.
+This was a pain as it would make two post in the slack room where it was being
+used, or if both computers were off, no one could use it. My friend was nice enough
+to give me ssh access to his raspberry pi so I could run my bot there and not have
+to buy server space or leave a dedicated computer running at all times. And while
+it was a great solution for where to run the bot to prevent the issue of too many instances
+or no instances, this presented a new problem, deploying. Having to ssh in and
+go through the deploy process every time I knew would eventually get too annoying.
+I knew I needed some kind of continuous integration and auto deploy process, but I didn’t want
+to pay for any services, nor for any servers to get something like Jenkins set up.
+So I decided to build my own solution using cron and a simple script.&lt;/p&gt;
+
+&lt;h2 id=&quot;shell-scripting&quot;&gt;Shell Scripting&lt;/h2&gt;
+&lt;p&gt;Like any good developer, as I was preparing to write the shell script I had to
+lay out the steps needed to make it work. I knew I needed to figure out if there
+were any new commits, if so, deploy. Naturally, the next step was deciding what
+a deploy consisted of. Deploying was as simple as killing the current running instance,
+gitting the new code, building, and running again in the background. The script
+below fetches the repo and greps the status for the word “behind”, then simply checks
+if it was found, and if so runs the commands needed to deploy.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/starbot
+git fetch
+&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git status -uno | grep &lt;span class=&quot;s2&quot;&gt;&quot;behind&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; ! &lt;span class=&quot;nv&quot;&gt;$git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+        &lt;/span&gt;ps -ef | grep &lt;span class=&quot;s2&quot;&gt;&quot;starbot&quot;&lt;/span&gt; | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt; | xargs &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; -9
+        git pull
+        mvn clean package
+        java -jar target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;-dependencies.jar &amp;gt; /tmp/starbot.log &amp;amp;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you wanted to use this command yourself, just be sure to change the ‘cd’ to the
+correct directory if it’s different from where the script lives, otherwise delete
+the line. After, change the commands in the if block to be specific to your
+application’s deploy process and then set cron to run the script.&lt;/p&gt;
+
+&lt;h2 id=&quot;cron&quot;&gt;Cron&lt;/h2&gt;
+&lt;p&gt;Cron jobs run a process at a specified interval. In this case, I want it to check
+for changes and redploy if they are there once a minute. To add a new cron job first
+run &lt;code class=&quot;highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt;. It will most likely ask you to choose an editor to continue.
+After you have the file opened simply add the following line &lt;code class=&quot;highlighter-rouge&quot;&gt;*/1 * * * * bash /home/scott/monitor.sh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;*/1 * * * *&lt;/code&gt; specifies an interval to run at, in our case one minute.
+you can also specify to run every hour on the 15 minute mark, or over the course
+of weeks, days, or months. I found &lt;a href=&quot;https://www.computerhope.com/unix/ucrontab.htm&quot;&gt;this tutorial&lt;/a&gt;
+to be quite useful when I was trying to figure the intervals out as well as cron
+in general.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Once you have your cron job set to run, you’re set, just push to the repo and
+it will poll at the specified interval and redeploy for you! I use this method
+to auto deploy my blog now as well in combination with the deploy script I wrote
+about in another &lt;a href=&quot;http://www.scottlavigne.com/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html&quot;&gt;blog post&lt;/a&gt;.
+Thanks for reading.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 May 2017 00:00:00 -0500</pubDate>
+        <link>http://www.scottlavigne.comhttp://www.scottlavigne.com/autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</link>
+        <guid isPermaLink="true">http://www.scottlavigne.comhttp://www.scottlavigne.com/autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</guid>
+        
+        <category>jekyll</category>
+        
+        <category>github</category>
+        
+        <category>deploy</category>
+        
+        
+        <category>autodeploy</category>
+        
+        <category>git</category>
+        
+        <category>cron</category>
+        
+        <category>bash</category>
+        
+        <category>script</category>
+        
+        <category>github</category>
+        
+        <category>deploy</category>
+        
+      </item>
+    
+      <item>
+        <title>Quizly - A javascript quiz library made with typescript</title>
+        <description>&lt;p&gt;As I was building &lt;a href=&quot;http://www.kimchichingu.com&quot;&gt;kimchichingu.com&lt;/a&gt; I decided that
+at the end of each section, a simple interactive quiz would help people see
+if they understood the lesson. Naturally, I set out to find a library for it because
+why would I make my own? After some googling I couldn’t find one that did what
+I wanted, most seemed to be more for polling or collecting info than a question
+answer style academic quiz, so I did what any good programmer would do and made
+my own!&lt;/p&gt;
+
+&lt;p&gt;As I set off to create the library I had to decide on a few things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Do I use jQuery? If so which version do I want to use as a dependency?”&lt;/li&gt;
+  &lt;li&gt;“How do I want to create the quizes? Json based? Attribute based?”&lt;/li&gt;
+  &lt;li&gt;“How do I want to distribute it? Git? Npm? Something else?”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of these were important questions, and I decided to not use jQuery as no one
+likes libraries that require libraries as a dependency, even though I am using it
+on Kimchi Chingu. I decided to allow the quizes to be made using json or attributes,
+and to allow for easy distribution through git and npm. Of course this led to more
+questions, such as how am I going to build this without worrying if the code works
+as intended if I want to expand it later or someone wants to open a pull request?
+I decided that in addition to tests, I was going to use something new and fancy
+and modern, something that compiles to vanilla javascript, and so I decided on
+Typescript. I get all the benefits of type checking as well as all the benefits
+of OOP, including being sure that privates are private, without the hassle of
+wondering if it is all working correctly.&lt;/p&gt;
+
+&lt;p&gt;So to reiterate, a vanilla javascript quiz library, with no dependencies, written
+in typescript, that can be used via json or annotations. I’m not going to before
+anyone with the gritty details in code as that can be seen in the repository
+&lt;a href=&quot;https://github.com/samuraiseoul/quizly&quot;&gt;here&lt;/a&gt;. Instead I’ll talk a bit about my
+experience building this in Typescript. I would say that the two hardest parts
+of writing this in typescript were that javascript doesn’t have true OOP,
+such as real &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt; access, as well as that when typescript checks
+for type mismatches, it also checks the &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLElement&lt;/code&gt; types by default, whether
+you want it to or not.&lt;/p&gt;
+
+&lt;p&gt;Javascript prototypical objects and inheritance don’t play well together when
+you add &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; into the mix, and also is just kind of clunky and more
+of a hacky solution than real classes like in a more OOP language such as Java.
+As a result, Typescript classes only check and enforce &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; functions
+and fields at compile time, and then all things are actually &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt; in the
+compiled javascript. This caused me hours of pain not knowing this as I was
+searching for a reason that my &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; fields were &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt; once compiled.&lt;/p&gt;
+
+&lt;p&gt;The second issue, the enforcing of &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLElement&lt;/code&gt; types by default, was a huge hassle
+at the beginning when compiling things as &lt;code class=&quot;highlighter-rouge&quot;&gt;document.querySelect()&lt;/code&gt; returns
+a generic &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLElement&lt;/code&gt; which is expected, and so you have to cast everything. I
+would imagine that in a different javascript library that wasn’t so element heavy,
+this would not be as much of a hassle, but it definitely was for quizly. I could
+have cast all of the &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLElement&lt;/code&gt; returns to any to avoid having to figure &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLElement&lt;/code&gt;
+and it’s family out, but as I would still have to cast just as many elements,
+and I would lose all the benefits of type checking that Typescript gives.
+I decided that learning which elements extend off of what would be useful as
+a web developer in future and also to make a more robust project now.&lt;/p&gt;
+
+&lt;p&gt;That’s the simplified story of quizly and how it was built. Would I use typescript
+again though? I definitely would. The type checking, is invaluable, and the
+familiarity with a OOP type syntax made coding something of this nature much
+less painful. So, if you’re looking for a quiz library to use on your site that is light weight,
+or a not too hard to understand example of typescript, please consider using quizly!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 19 Apr 2017 00:00:00 -0500</pubDate>
+        <link>http://www.scottlavigne.comhttp://www.scottlavigne.com/typescript/javascript/library/2017/04/19/quizly.html</link>
+        <guid isPermaLink="true">http://www.scottlavigne.comhttp://www.scottlavigne.com/typescript/javascript/library/2017/04/19/quizly.html</guid>
+        
+        <category>typescript</category>
+        
+        <category>javascript</category>
+        
+        
+        <category>typescript</category>
+        
+        <category>javascript</category>
+        
+        <category>library</category>
+        
+      </item>
+    
+      <item>
+        <title>Deploying jekyll with custom plugins to github pages</title>
+        <description>&lt;p&gt;In the process of building this site and &lt;a href=&quot;http://www.kimchichingu,com&quot;&gt;www.kimchichingu.com&lt;/a&gt;
+I had to figure out many things, one of the most important being of course, deploying.
+When deciding to deploy a site one of the most important things to decide is where
+to host it, I chose to use github pages, like any cheap-skate developer with a
+github account would. This seemed like it was going to work out great, just make changes
+and github will build and deploy to github pages for me! What could go wrong?&lt;/p&gt;
+
+&lt;h2 id=&quot;plugins&quot;&gt;Plugins&lt;/h2&gt;
+
+&lt;p&gt;Custom plugins and any other ruby gems. Github doesn’t allow for the use
+of non-standard jekyll in their github pages if you want them to build it for you.
+They list on their site that it’s due to security reasons, which is fine, but what’s
+a developer to do? Well, you can build it yourself and deploy it to a /docs subfolder
+in your project, or checkout master in a gh-pages branch and then remove everything
+that isn’t part of your generated site. Both of those are messy code wise and
+git history wise. I’ve found a better way.&lt;/p&gt;
+
+&lt;h2 id=&quot;git-subtree&quot;&gt;git subtree&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin :gh-pages
+git subtree push --prefix _site/ origin gh-pages
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Instead, delete the remote branch, and push your compiled site as an orphan branch!
+This keeps your history clean and prevents you from checking in un-needed files, but
+not all is well yet. First you still have to change your baseurl if you use a
+different one locally, and also you have to be sure that the build folder is not
+in gitignore. This means you have to be sure to not accidentally check your built
+site in and also to not check in your incorrect config.&lt;/p&gt;
+
+&lt;p&gt;The alternative I’ve found is having a _config.yml and a _config.yml.example and
+only checking in the example file to git. In my case as Kimchu Chingu is open source
+I want anyone to easily clone and build the repo, so a master config is important.
+I also have a .gitignore-publish file that I use when I deploy. This requires you
+to rename files, then once pushed, rename them back which is messy and time consuming
+as well as error prone. To minimalize this, I made a simple script that does it
+all and cleans up to be sure that nothing weird gets checked in.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv .gitignore .gitignore-local
+mv .gitignore-publish .gitignore
+mv _config.yml _config-local.yml
+mv _config.yml.example _config.yml
+bundle exec jekyll build
+git add -A
+git commit -m &quot;publish&quot;
+git push origin :gh-pages
+git subtree push --prefix _site/ origin gh-pages
+mv .gitignore .gitignore-publish
+mv .gitignore-local .gitignore
+mv _config.yml _config.yml.example
+mv _config-local.yml _config.yml
+git reset HEAD~1
+git stash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Since I use this script in two places and didn’t want to copy it include any changes
+I made a &lt;a href=&quot;https://github.com/samuraiseoul/JekyllDeploy&quot;&gt;repo&lt;/a&gt; for the script alone. Then I add it to jekyll projects that deploy
+to github pages using&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git submodule add git@github.com:samuraiseoul/JekyllDeploy.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This prevents code reuse and allows easy updating in the future. Once you have the
+module pulled in, just run &lt;code class=&quot;highlighter-rouge&quot;&gt;sh JekyllDeploy/publish.sh&lt;/code&gt; and your site should
+build and be deployed!&lt;/p&gt;
+
+&lt;p&gt;Happy deving!&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Apr 2017 00:00:00 -0500</pubDate>
+        <link>http://www.scottlavigne.comhttp://www.scottlavigne.com/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</link>
+        <guid isPermaLink="true">http://www.scottlavigne.comhttp://www.scottlavigne.com/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</guid>
+        
+        <category>jekyll</category>
+        
+        <category>github</category>
+        
+        <category>deploy</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+        <category>github</category>
+        
+        <category>deploy</category>
+        
+      </item>
+    
+  </channel>
+</rss>
