@@ -11,16 +11,16 @@
 
 # Renge supports categories and tags, which are defined in each of your posts.
 # Also, You can add or removed links in /_includes/sider.html .
-# please change the belowing settings to your own.
+# please change the below settings to your own.
 
 # Site settings
-title: Scott Lavigne
-email: scottlavigne28@gmail.com
+title: Sophie The Lionhart
+email: sophielionhart@gmail.com
 description: >
-  Scott Lavigne's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occassional
+  Sophie The Lionhart's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occasional
   cooking article.
-baseurl: "http://www.scottlavigne.com" # the subpath of your site, e.g. /blog
-url: "http://www.scottlavigne.com" # the base hostname & protocol for your
+baseurl: "http://www.sophielionhart.com" # the sub path of your site, e.g. /blog
+url: "http://www.sophielionhart.com" # the base hostname & protocol for your
 github_username:  samuraiseoul
 
 # Build settings
