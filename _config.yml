@@ -31,8 +31,8 @@ paginate: 5
 gems: [jekyll-paginate]
 paginate_path: "/page/:num"
 include: [ '_assets', '.nojekyll']
-source: "./_src"
-destination: ./
+source: "."
+destination: ./_site
 
 # Github Pages stuff
 lsi: false
@@ -48,4 +48,4 @@ kramdown:
 
 domain: samuraiseoul.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 url: https://samuraiseoul.github.io/  # the base hostname and protocol for your site, e.g. http://example.com
-baseurl: ./_site/      # place folder name if the site is served in a subfolder
+baseurl: ./_site      # place folder name if the site is served in a subfolder
