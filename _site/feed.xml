@@ -4,10 +4,10 @@
     <title>Sophie The Lionhart</title>
     <description>Sophie The Lionhart's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occasional cooking article.
 </description>
-    <link>https://scottlavigne.com/_site/</link>
-    <atom:link href="https://scottlavigne.com/_site/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 24 Nov 2021 15:10:33 -0600</pubDate>
-    <lastBuildDate>Wed, 24 Nov 2021 15:10:33 -0600</lastBuildDate>
+    <link>https://scottlavigne.com//</link>
+    <atom:link href="https://scottlavigne.com//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 24 Nov 2021 15:12:06 -0600</pubDate>
+    <lastBuildDate>Wed, 24 Nov 2021 15:12:06 -0600</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -50,8 +50,8 @@ all live together in one table. The hard part though was what to call them.&lt;/
  next time you find naming things to be hard, try opening a thesaurus!&lt;/p&gt;
 </description>
         <pubDate>Mon, 18 Dec 2017 00:00:00 -0600</pubDate>
-        <link>https://scottlavigne.com/_site/programming/general/naming/2017/12/18/thesaurus-naming.html</link>
-        <guid isPermaLink="true">https://scottlavigne.com/_site/programming/general/naming/2017/12/18/thesaurus-naming.html</guid>
+        <link>https://scottlavigne.com//programming/general/naming/2017/12/18/thesaurus-naming.html</link>
+        <guid isPermaLink="true">https://scottlavigne.com//programming/general/naming/2017/12/18/thesaurus-naming.html</guid>
         
         <category>general</category>
         
@@ -129,12 +129,12 @@ in general.&lt;/p&gt;
 &lt;p&gt;Once you have your cron job set to run, you’re set, just push to the repo and
 it will poll at the specified interval and redeploy for you! I use this method
 to auto deploy my blog now as well in combination with the deploy script I wrote
-about in another &lt;a href=&quot;_site/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html&quot;&gt;blog post&lt;/a&gt;.
+about in another &lt;a href=&quot;/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html&quot;&gt;blog post&lt;/a&gt;.
 Thanks for reading.&lt;/p&gt;
 </description>
         <pubDate>Wed, 17 May 2017 00:00:00 -0500</pubDate>
-        <link>https://scottlavigne.com/_site/autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</link>
-        <guid isPermaLink="true">https://scottlavigne.com/_site/autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</guid>
+        <link>https://scottlavigne.com//autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</link>
+        <guid isPermaLink="true">https://scottlavigne.com//autodeploy/git/cron/bash/script/github/deploy/2017/05/17/poor-man-auto-deploy.html</guid>
         
         <category>jekyll</category>
         
@@ -225,8 +225,8 @@ less painful. So, if you’re looking for a quiz library to use on your site tha
 or a not too hard to understand example of typescript, please consider using quizly!&lt;/p&gt;
 </description>
         <pubDate>Wed, 19 Apr 2017 00:00:00 -0500</pubDate>
-        <link>https://scottlavigne.com/_site/typescript/javascript/library/2017/04/19/quizly.html</link>
-        <guid isPermaLink="true">https://scottlavigne.com/_site/typescript/javascript/library/2017/04/19/quizly.html</guid>
+        <link>https://scottlavigne.com//typescript/javascript/library/2017/04/19/quizly.html</link>
+        <guid isPermaLink="true">https://scottlavigne.com//typescript/javascript/library/2017/04/19/quizly.html</guid>
         
         <category>typescript</category>
         
@@ -315,8 +315,8 @@ build and be deployed!&lt;/p&gt;
 &lt;p&gt;Happy deving!&lt;/p&gt;
 </description>
         <pubDate>Fri, 14 Apr 2017 00:00:00 -0500</pubDate>
-        <link>https://scottlavigne.com/_site/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</link>
-        <guid isPermaLink="true">https://scottlavigne.com/_site/jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</guid>
+        <link>https://scottlavigne.com//jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</link>
+        <guid isPermaLink="true">https://scottlavigne.com//jekyll/update/github/deploy/2017/04/14/jekyll-deploy.html</guid>
         
         <category>jekyll</category>
         
