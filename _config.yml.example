@@ -19,13 +19,15 @@ email: sophielionhart@gmail.com
 description: >
   Sophie The Lionhart's personal blog. Here you'll find posts about projects, programming concepts, Japan and Japanese, Korea and Korean, as well as the occasional
   cooking article.
-baseurl: "http://www.sophielionhart.com" # the sub path of your site, e.g. /blog
-url: "http://www.sophielionhart.com" # the base hostname & protocol for your
+#baseurl: "http://localhost:3000" # the sub path of your site, e.g. /blog
+#baseurl: "http://www.sophielionhart.com" # the sub path of your site, e.g. /blog
+#url: "http://localhost:3000" # the base hostname & protocol for your
+#url: "http://www.sophielionhart.com" # the base hostname & protocol for your
 github_username:  samuraiseoul
 
 # Build settings
 markdown: kramdown
-paginate: 3
+paginate: 5
 gems: [jekyll-paginate]
 paginate_path: "/page/:num"
 include: [ '_assets', '.nojekyll']
