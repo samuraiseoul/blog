@@ -1,0 +1,33 @@
+.rengecenter {
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+.v-center {
+    width:1024px;
+}
+.samurai{
+  margin-top: 10px;
+}
+.samurai img{
+  display:block;
+  margin: auto;
+}
+#username{
+  font-size: 8pt;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.content{
+  margin-top: -2em;
+}
+p{
+  font-size: 18px;
+}
