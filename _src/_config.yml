@@ -32,7 +32,7 @@ gems: [jekyll-paginate]
 paginate_path: "/page/:num"
 include: [ '_assets', '.nojekyll']
 source: "./_src"
-destination: ./
+destination: ../_site
 
 # Github Pages stuff
 lsi: false

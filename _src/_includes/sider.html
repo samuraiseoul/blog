@@ -1,0 +1,24 @@
+<div class="col-xs-2 span3">
+  <ul class="nav nav-list">
+<hr>
+    <li class="nav-header"><big><b>Categories</b></big></li>
+      {% for category in site.categories %}
+        <li><a href="/_src/category#{{ category[0] }}">{{ category[0] }}</a></li>
+      {% endfor %}
+      <hr>
+    <li class="nav-header"><big><b>Tags</b></big></li>
+    <br />
+    {% for tag in site.tags %}
+        <big><a class="label label-info" href="/_src/tags#{{ tag[0] }}">{{ tag[0] }}</a></big>
+    {% endfor %}
+    <hr>
+      <li class="nav-header"><big><b>Links</b></big></li>
+
+      <li><a href="https://github.com/samuraiseoul">Github</a></li>
+      <li><a href="http://stackoverflow.com/users/457437/samuraisoulification">Stack Overflow</a></li>
+      <li><a href="https://www.linkedin.com/in/sophielionhart/">LinkedIn</a></li>
+      <li><a href="https://www.facebook.com/sophielionhart">Facebook</a></li>
+      <li><a title="{{site.email}}" href="mailto:{{site.email}}">Email</a></li>
+      <li><a href="/_src/_assetsssets/resume.pdf" download>Resume</a></li>
+  </ul>
+</div>
